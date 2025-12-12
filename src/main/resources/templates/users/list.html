@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Users</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:0;background:#f4f6fb}
+    header{background:#111827;color:#fff;padding:14px 22px;font-weight:700}
+    .wrap{max-width:980px;margin:22px auto;padding:18px}
+    .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:#0b57d0;color:#fff;text-decoration:none}
+    table{width:100%;border-collapse:collapse;margin-top:14px}
+    th,td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left}
+    .ok{background:#dcfce7;color:#166534;padding:10px;border-radius:10px;margin:10px 0}
+  </style>
+</head>
+<body>
+<header>👤 Users Module</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="top">
+      <div>
+        <h2 style="margin:0">Users List</h2>
+        <div style="color:#6b7280;font-size:14px">Minimal CRUD: list + create</div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <a class="btn" href="/users/new">+ New</a>
+        <a class="btn" href="/" style="background:#374151">Home</a>
+      </div>
+    </div>
+
+    <div th:if="${ok}" class="ok" th:text="${ok}"></div>
+
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Email</th><th>Role</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="u : ${users}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.name}"></td>
+        <td th:text="${u.email}"></td>
+        <td th:text="${u.role}"></td>
+      </tr>
+      <tr th:if="${#lists.isEmpty(users)}">
+        <td colspan="4" style="color:#6b7280">No users yet.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>

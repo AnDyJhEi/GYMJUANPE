@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>New User</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:0;background:#f4f6fb}
+    header{background:#111827;color:#fff;padding:14px 22px;font-weight:700}
+    .wrap{max-width:720px;margin:22px auto;padding:18px}
+    .card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    label{display:block;margin-top:12px;font-weight:600}
+    input,select{width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:10px;margin-top:6px}
+    .btn{display:inline-block;margin-top:14px;padding:10px 14px;border-radius:10px;background:#0b57d0;color:#fff;text-decoration:none;border:none;cursor:pointer}
+    .btn.secondary{background:#374151}
+    .err{color:#b91c1c;font-size:13px;margin-top:4px}
+    .row{display:flex;gap:10px;align-items:center;margin-top:14px}
+  </style>
+</head>
+<body>
+<header>➕ Create User</header>
+
+<div class="wrap">
+  <div class="card">
+    <form th:action="@{/users}" th:object="${user}" method="post">
+
+      <label>Name</label>
+      <input type="text" th:field="*{name}" placeholder="e.g. John Doe">
+      <div class="err" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+      <label>Email</label>
+      <input type="email" th:field="*{email}" placeholder="e.g. john@gmail.com">
+      <div class="err" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+      <label>Role</label>
+      <select th:field="*{role}">
+        <option value="">-- Select --</option>
+        <option value="CLIENT">CLIENT</option>
+        <option value="RECEPTIONIST">RECEPTIONIST</option>
+        <option value="ADMIN">ADMIN</option>
+      </select>
+      <div class="err" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
+
+      <div class="row">
+        <button class="btn" type="submit">Save</button>
+        <a class="btn secondary" href="/users">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
